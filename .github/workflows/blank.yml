@@ -30,7 +30,7 @@ jobs:
         run: |
           find /etc -ls || :
 
-      - name: Run a multi-line script
+      - name: Show environment
         run: env | sort
 
       - name: Show Docker config
@@ -48,8 +48,13 @@ jobs:
           echo "Flags:     ${{ steps.buildx.outputs.flags }}"
           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
           
-      - name: Run a multi-line script
+      - name: Show environment
         run: env | sort
 
       - name: Show Docker config
         run: cat /etc/docker/daemon.json
+
+      - name: Build docker-compose
+        run: docker compose build
+        env:
+          DOCKER_BUILDKIT: 1
