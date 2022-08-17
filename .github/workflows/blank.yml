@@ -27,7 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: List /etc
-        run: find /etc -ls
+        run: |
+          find /etc -ls || :
 
       - name: Run a multi-line script
         run: env | sort
