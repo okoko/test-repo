@@ -1,4 +1,15 @@
 services:
-  test:
-    build: .
-    
+  a:
+    build:
+      context: a
+      cache_from:
+      - type=local,src=/tmp/.buildx/a
+      cache_to:
+      - type=local,dest=/tmp/.buildx/a-new
+  b:
+    build:
+      context: b
+      cache_from:
+      - type=local,src=/tmp/.buildx/b
+      cache_to:
+      - type=local,dest=/tmp/.buildx/b-new
