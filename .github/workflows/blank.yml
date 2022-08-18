@@ -68,7 +68,7 @@ jobs:
           load: true
           # Maybe push straight to the Azure registry? push: true
           tags: |
-            okoko/${{ matrix.image }}:${{ matrix.torch }}-${{ matrix.python }}
+            okoko/${{ matrix.image }}:${{ github.run_number }}
           # https://github.com/docker/build-push-action/blob/master/docs/advanced/cache.md#github-cache
           cache-from: type=local,src=/tmp/.buildx
           cache-to: type=local,dest=/tmp/.buildx-new,mode=max
