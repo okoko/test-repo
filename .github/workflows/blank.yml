@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@c84f38281176d4c9cdb1626ffafcd6b3911b5d94 # v3.1.1
         with:
           context: ${{ matrix.context || matrix.image }}
-          file: ${{ matrix.dockerfile || 'Dockerfile' }}
+          file: ${{ matrix.dockerfile || join([matrix.context || matrix.image, 'Dockerfile'], '/') }}
           build-args: |
             CREATED=${{ needs.pre.outputs.created }}
             SOURCE_COMMIT=${{ github.sha }}
