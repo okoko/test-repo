@@ -1,0 +1,38 @@
+name: Self hosted
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: [self-hosted, vAVADocker1]
+
+    steps:
+    - name: scan pipx
+      run: pipx list
+      
+    - name: Cache MongoDB binary
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/mongodb-binaries
+        key: mongodb
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+        cache-dependency-path: ava/js/package-lock.json
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.9'
+        # Install with pip cache is slower than without it. Wheels get rebuilt so cache does not help.
+        # cache: 'pip' # caching pip dependencies
+        # cache-dependency-path: 'ava/py/unittest/requirements.txt'
+
+    # Setup container builder for the cache
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325 # v2.2.1
