@@ -27,7 +27,3 @@ jobs:
 
     - name: List home files
       run: find /home/runner -maxdepth 3 -ls
-
-    - name: See GitHubActionsService cache
-      run: find /usr/share/GitHubActionsService -maxdepth 3 -ls
-      
