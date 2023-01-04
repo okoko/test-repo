@@ -10,8 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: id
+      run: id
+      
     - name: scan pipx
       run: pipx list
       
     - name: List environment
       run: env | sort
+
+    - name: List /opt files
+      run: find /opt -maxdepth 3 -ls
+      
+    - name: List /usr/local files
+      run: find /usr/local -maxdepth 3 -ls
+    
