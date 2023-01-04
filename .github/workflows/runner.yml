@@ -12,3 +12,6 @@ jobs:
     steps:
     - name: scan pipx
       run: pipx list
+      
+    - name: List environment
+      run: env | sort
