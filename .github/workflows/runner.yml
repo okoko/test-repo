@@ -1,0 +1,14 @@
+name: Check runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: scan pipx
+      run: pipx list
