@@ -7,7 +7,7 @@ jobs:
 
   build:
 
-    runs-on: [self-hosted, host]
+    runs-on: [self-hosted, vAVADocker1]
 
     steps:
     - name: Id
