@@ -48,6 +48,8 @@ jobs:
       uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325 # v2.2.1
       continue-on-error: true
 
+    - uses: actions/checkout@v3
+
     - name: Test local action
       uses: ./action
       with:
