@@ -58,6 +58,9 @@ jobs:
           echo running
           pwd
           env|sort
+          echo '${{ toJSON(github) }}'
+          echo '${{ toJSON(job) }}'
+          echo '${{ toJSON(runner) }}'
           find /github
           find /home
           echo args: $#
