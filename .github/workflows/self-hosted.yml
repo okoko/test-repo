@@ -54,4 +54,5 @@ jobs:
       uses: ./action
       with:
         args: echo $# - $0 - "$@"
+        run: job
       continue-on-error: true

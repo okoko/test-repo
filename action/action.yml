@@ -1,6 +1,12 @@
 # action.yml
 name: 'Test Docker action'
 description: 'Test host the Dockerfile action works'
+inputs:
+  run:
+    description: The shell command to run in the container
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.run }}
