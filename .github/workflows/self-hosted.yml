@@ -22,6 +22,8 @@ jobs:
       run: pipx list
       continue-on-error: true
 
+    - uses: actions/checkout@v3
+
     - name: Cache MongoDB binary
       uses: actions/cache@v3
       with:
@@ -32,8 +34,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'npm'
-        cache-dependency-path: ava/js/package-lock.json
       continue-on-error: true
 
     - uses: actions/setup-python@v4
@@ -50,15 +50,22 @@ jobs:
       uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325 # v2.2.1
       continue-on-error: true
 
-    - uses: actions/checkout@v3
-
     - name: Test local action
       uses: ./action
       with:
         args: echo $# - $0 - "$@"
         run: |
           echo running
-          echo "$INPUT_ARGS"
+          pwd
+          env|sort
+          find /github
+          find /home
+          echo args: $#
+          for arg in "$@"
+          do
+              echo - "$arg"
+          done
           false
           echo past failure
-      continue-on-error: true
+
+    - run: echo Here
