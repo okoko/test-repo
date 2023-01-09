@@ -60,4 +60,5 @@ jobs:
           echo running
           echo "$INPUT_ARGS"
           false
+          echo past failure
       continue-on-error: true
