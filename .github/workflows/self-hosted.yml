@@ -65,7 +65,7 @@ jobs:
           do
               echo - "$arg"
           done
-          false
-          echo past failure
+          # false
+          # echo past failure
 
     - run: echo Here
