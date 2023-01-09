@@ -58,6 +58,6 @@ jobs:
         args: echo $# - $0 - "$@"
         run: |
           echo running
-          echo "INPUT_ARGS"
+          echo "$INPUT_ARGS"
           false
       continue-on-error: true

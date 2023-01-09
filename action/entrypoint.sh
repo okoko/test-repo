@@ -10,5 +10,5 @@ do
     echo - "$arg"
 done
 
-set -x
+set -ex
 eval "$1"
