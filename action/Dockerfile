@@ -1,3 +1,4 @@
 FROM debian:bullseye
-ENTRYPOINT [ "/bin/bash" ]
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD []
