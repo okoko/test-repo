@@ -2,6 +2,8 @@
 
 pwd
 env|sort
+find /github
+find /home
 echo args: $#
 for arg in "$@"
 do
