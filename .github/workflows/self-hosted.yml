@@ -56,5 +56,8 @@ jobs:
       uses: ./action
       with:
         args: echo $# - $0 - "$@"
-        run: job
+        run: |
+          echo running
+          echo "INPUT_ARGS"
+          false
       continue-on-error: true
