@@ -1,6 +1,8 @@
 name: Self hosted
 
 on:
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
