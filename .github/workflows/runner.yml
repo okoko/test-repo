@@ -27,3 +27,12 @@ jobs:
 
     - name: List home files
       run: find /home/runner -maxdepth 3 -ls
+      
+    - name: Find commands
+      run: |
+        IFS=:
+        for d in $PATH
+        do
+          echo --- "$d"
+          ls -l "$d"
+        done
