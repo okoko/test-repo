@@ -34,5 +34,5 @@ jobs:
         for d in $PATH
         do
           echo --- "$d"
-          ls -l "$d"
+          ls -l "$d" || :
         done
