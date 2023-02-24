@@ -36,3 +36,9 @@ jobs:
           echo --- "$d"
           ls -l "$d" || :
         done
+
+    - name: Find apt sources
+      run: |
+        cat /etc/apt/sources.list
+        grep . /etc/apt/sources.list.d/*
+        dpkg -l
