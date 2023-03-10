@@ -29,10 +29,10 @@ jobs:
             
             function *files(commit) {
               for(const commit of context.payload.commits) {
-                for(const path of commit.added) {
+                for(const path of commit.added || []) {
                   yield path
                 }
-                for(const path of commit.modified) {
+                for(const path of commit.modified || []) {
                   yield path
                 }
               }
