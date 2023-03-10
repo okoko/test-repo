@@ -18,7 +18,7 @@ jobs:
             // https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts
             const paths = new Set(files(context.payload.commits))
             const sites = new Set()
-            const path_re = /\/([^/]+)\/neuralnet.tag$/
+            const path_re = /([^/]+)\/neuralnet.tag$/
             for(const path of paths) {
               const m = path_re.exec(path)
               if (m) {
