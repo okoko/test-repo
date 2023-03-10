@@ -17,24 +17,13 @@ jobs:
             // https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
             // https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts
             console.log('event:', context.payload)
-            const paths = new Set(files(context.payload.commits))
-            const sites = new Set()
-            const path_re = /([^/]+)\/neuralnet.tag$/
-            for(const path of paths) {
-              const m = path_re.exec(path)
-              if (m) {
-                sites.add(m[1])
-              }
-            }
-            console.log('Result:', [...sites])
-            
-            function *files(commit) {
-              for(const commit of context.payload.commits) {
-                for(const path of commit.added || []) {
-                  yield path
-                }
-                for(const path of commit.modified || []) {
-                  yield path
-                }
-              }
-            }
+            context.payload.repo.
+            const runs = github.rest.actions.listWorkflowRuns({
+              owner: context.payload.repo.owner,
+              repo: context.payload.repo.repo,
+              workflow_id: 'github-script.yml',
+              branch: 'main',
+              event: 'push',
+              status: 'success',
+            });
+            console.log('runs:', runs)
