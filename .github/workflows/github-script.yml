@@ -17,7 +17,6 @@ jobs:
             // https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
             // https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts
             console.log('event:', context.payload)
-            context.payload.repo.
             const runs = github.rest.actions.listWorkflowRuns({
               owner: context.payload.repo.owner,
               repo: context.payload.repo.repo,
