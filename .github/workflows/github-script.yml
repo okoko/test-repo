@@ -27,3 +27,6 @@ jobs:
               status: 'success',
             });
             console.log('runs:', runs)
+            for(const run of runs.data.workflow_runs) {
+              console.log(run)
+            }
