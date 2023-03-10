@@ -25,7 +25,7 @@ jobs:
                 sites.add(m[1])
               }
             }
-            core.info([...sites])
+            console.log('Result:', [...sites])
             
             function *files(commit) {
               for(const commit of context.payload.commits) {
