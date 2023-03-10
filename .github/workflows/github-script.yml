@@ -16,6 +16,7 @@ jobs:
           script: |
             // https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
             // https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts
+            console.log('event:', context.payload)
             const paths = new Set(files(context.payload.commits))
             const sites = new Set()
             const path_re = /([^/]+)\/neuralnet.tag$/
