@@ -1,0 +1,39 @@
+name: Test script
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            // https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+            // https://github.com/actions/toolkit/blob/main/packages/github/src/context.ts
+            const paths = Set(files(context.payload.commits))
+            const sites = Set()
+            const path_re = /\/([^/]+)\/neuralnet.tag$/
+            for(const path of paths) {
+              const m = path_re.exec(path)
+              if (m) {
+                sites.add(m[1])
+              }
+            }
+            core.info(Array.from(sites))
+            
+            function *files(commit) {
+              for(const commit of context.payload.commits) {
+                for(const path of commit.added) {
+                  yield path
+                }
+                for(const path of commit.modified) {
+                  yield path
+                }
+              }
+            }
