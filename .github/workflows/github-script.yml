@@ -1,7 +1,7 @@
 name: Test script
 
 on:
-  workflow_dispatch:
+  push:
 
 permissions:
   contents: read
