@@ -16,5 +16,5 @@ jobs:
         continue-on-error: true
       - run: git config -l
       - run: |
-          git clone https://x-access-token:${{ github.token }}/okoko/test-repo.git
+          git clone https://x-access-token:${{ github.token }}@github.com/okoko/test-repo.git
           cat test-repo/.git/config
