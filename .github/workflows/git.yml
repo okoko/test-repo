@@ -1,0 +1,13 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git config -l
+      - run: cat ~/.gitconfig
+      - uses: actions/checkout
+      - run: cat .git/config
