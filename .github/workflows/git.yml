@@ -9,5 +9,9 @@ jobs:
     steps:
       - run: git config -l
       - run: cat ~/.gitconfig
+        continue-on-error: true
       - uses: actions/checkout@v3
       - run: cat .git/config
+      - run: cat ~/.gitconfig
+        continue-on-error: true
+      - run: git config -l
