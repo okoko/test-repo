@@ -9,5 +9,5 @@ jobs:
     steps:
       - run: git config -l
       - run: cat ~/.gitconfig
-      - uses: actions/checkout
+      - uses: actions/checkout@v3
       - run: cat .git/config
