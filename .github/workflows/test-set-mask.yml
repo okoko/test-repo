@@ -1,4 +1,4 @@
-name: Test set-mask
+name: Test add-mask
 
 on:
   workflow_dispatch:
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo '    "msg": "::set-mask::salaisuus"'
+        echo '    "msg": "::add-mask::salaisuus"'
     - run: |
-        echo '    ::set-mask::salattu'
+        echo '    ::add-mask::salattu'
     - run: |
-        echo '::set-mask::rivinalussa'
+        echo '::add-mask::rivinalussa'
     - run: |
         echo 'salaisuus  salaisuus" salattu  rivinalussa'
         
