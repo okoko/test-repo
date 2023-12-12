@@ -1,0 +1,20 @@
+name: Test set-mask
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo '    "msg": "::set-mask::salaisuus"'
+    - run: |
+        echo '    ::set-mask::salattu'
+    - run: |
+        echo '::set-mask::rivinalussa'
+    - run: |
+        echo 'salaisuus  salaisuus" salattu  rivinalussa'
+        
