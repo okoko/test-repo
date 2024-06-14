@@ -42,3 +42,8 @@ jobs:
         cat /etc/apt/sources.list
         grep . /etc/apt/sources.list.d/*
         dpkg -l
+
+    - name: docker system info
+      run: |
+        docker system info
+        cat /etc/docker/daemon.json
