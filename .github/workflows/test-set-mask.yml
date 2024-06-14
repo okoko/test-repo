@@ -18,3 +18,10 @@ jobs:
     - run: |
         echo 'salaisuus  salaisuus" salattu  rivinalussa'
         
+    - run: |
+        echo "FOO=bar" >> "$GITHUB_ENV"
+    - run: |
+        env
+        echo "${{ toJSON(env) }}"
+      env:
+        BAZ: ${{ env.FOO }}
