@@ -8,7 +8,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    environment: test-env
     steps:
     - name: id
       run: id
@@ -53,4 +53,6 @@ jobs:
     - name: Show env context
       run: echo '${{ toJSON(env) }}'
     - name: Show secrets context
-      run: echo '${{ toJSON(secrets) }}'
+      run: echo "$SECRETS"
+      env:
+        SECRETS: ${{ toJSON(secrets) }}
