@@ -47,3 +47,10 @@ jobs:
       run: |
         docker system info
         cat /etc/docker/daemon.json
+
+    - name: Show runner context
+      run: echo '${{ toJSON(runner) }}'
+    - name: Show env context
+      run: echo '${{ toJSON(env) }}'
+    - name: Show secrets context
+      run: echo '${{ toJSON(secrets) }}'
