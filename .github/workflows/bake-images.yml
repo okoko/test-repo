@@ -24,9 +24,12 @@ jobs:
         files: docker-bake.hcl
 
     - name: Save built images list
-      run: echo "${{ steps.build.outputs.metadata }}" > "${{ runner.temp }}/metadata.json"
+      run: echo "$METADATA" > "${{ runner.temp }}/metadata.json"
+      env:
+        METADATA: ${{ steps.build.outputs.metadata }}
 
     - run: jq --version
+    - run: cat "${{ runner.temp }}/metadata.json"
     - run: jq < "${{ runner.temp }}/metadata.json"
 
     - run: |
