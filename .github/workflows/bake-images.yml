@@ -28,18 +28,12 @@ jobs:
       env:
         METADATA: ${{ steps.build.outputs.metadata }}
 
-    - run: jq --version
     - run: cat "${{ runner.temp }}/metadata.json"
-    - run: jq < "${{ runner.temp }}/metadata.json"
 
+    # The metadata for docker-container driver does not contain tags.
     - run: |
-        tags=$(jq -r '.[]."image.name" | split(",") | .[] | select(. | endswith(":latest") |not) | ltrimstr("docker.io/")' << DATA
-        $METADATA
-        DATA
-        )
-        echo "$tags" > "${{ runner.temp }}/images.txt"
-      env:
-        METADATA: ${{ steps.build.outputs.metadata }}
+        docker buildx bake --file docker-bake.hcl --print |
+        jq -r '.target | .[].tags | .[] | select(. | endswith(":latest") | not)' > "${{ runner.temp }}/images.txt"
 
     - name: Upload built images list
       uses: actions/upload-artifact@v4
@@ -68,10 +62,11 @@ jobs:
 
     - name: Push Docker images
       run: |
+        set -x
         for r in $(cat ${{ runner.temp }}/images.txt) "neuralnet/ccdocgpu1:$IMAGE_TAG"
         do
           docker tag $r "$CC_REGISTRY$r"
-          docker push "$CC_REGISTRY$r"
+          echo docker push "$CC_REGISTRY$r"
           docker tag $r "$CC_REGISTRY${r%:*}:latest"
-          docker push "$CC_REGISTRY${r%:*}:latest"
+          echo docker push "$CC_REGISTRY${r%:*}:latest"
         done
