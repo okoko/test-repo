@@ -11,5 +11,5 @@ target "a" {
 target "b" {
   context = "b"
   dockerfile = "Dockerfile"
-  tags = ["b", "foo/b:baz"]
+  tags = ["b:latest", "foo/b:baz"]
 }

@@ -23,7 +23,7 @@ jobs:
       with:
         files: docker-bake.hcl
 
-    - name: Save built images list
+    - name: Save metadata images list
       run: echo "$METADATA" > "${{ runner.temp }}/metadata.json"
       env:
         METADATA: ${{ steps.build.outputs.metadata }}
@@ -38,13 +38,9 @@ jobs:
     - name: Upload built images list
       uses: actions/upload-artifact@v4
       with:
-        name: metadata
+        name: built-images
         path: |
-          ${{ runner.temp }}/metadata.json
           ${{ runner.temp }}/images.txt
-
-    - run: |
-        echo '${{ steps.build.outputs.metadata.*.image.name }}'
 
     - name: List images
       run: |
