@@ -1,0 +1,37 @@
+name: Test Go
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      # regclient does not currently release a version with support for exporting multiple images
+      # https://github.com/regclient/regclient/issues/710
+      - name: Check out regclient
+        uses: actions/checkout@v4
+        with:
+          repository: okoko/regclient
+          ref: export-many
+          path: regclient
+
+      - name: Setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'regclient/go.mod'
+          cache-dependency-path: 'regclient/go.sum'
+
+      - name: Install regctl
+        working-directory: regclient
+        run: |
+          go install ./cmd/regctl
+
+      - name: Check PATH
+        run: |
+          env
+          type -p regctl
+          type -p go
