@@ -1,0 +1,28 @@
+name: Test Apache archive download
+
+on:
+  workflow_dispatch:
+
+env:
+  proton: 0.40.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: test-env
+    steps:
+    - id: cache
+      uses: actions/cache@v4
+      with:
+        path: proton
+        key: proton-${{ env.proton }}
+        enableCrossOsArchive: true
+    - if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        curl -fLOsS https://archive.apache.org/dist/qpid/proton/${proton}/qpid-proton-${proton}.tar.gz.asc
+        curl -fLOsS https://archive.apache.org/dist/qpid/proton/${proton}/qpid-proton-${proton}.tar.gz
+    - run: |
+        curl -fLOsS https://downloads.apache.org/qpid/KEYS
+        gpg --no-default-keyring --keyring trustedkeys.kbx --import KEYS
+    - run: |
+        gpgv qpid-proton-${proton}.tar.gz.asc qpid-proton-${proton}.tar.gz
