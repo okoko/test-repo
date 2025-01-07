@@ -10,6 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - run: mkdir proton
     - id: cache
       uses: actions/cache@v4
       with:
