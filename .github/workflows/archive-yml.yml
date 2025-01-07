@@ -9,7 +9,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: test-env
     steps:
     - id: cache
       uses: actions/cache@v4
@@ -18,11 +17,14 @@ jobs:
         key: proton-${{ env.proton }}
         enableCrossOsArchive: true
     - if: steps.cache.outputs.cache-hit != 'true'
+      working-directory: proton
       run: |
         curl -fLOsS https://archive.apache.org/dist/qpid/proton/${proton}/qpid-proton-${proton}.tar.gz.asc
         curl -fLOsS https://archive.apache.org/dist/qpid/proton/${proton}/qpid-proton-${proton}.tar.gz
-    - run: |
+    - working-directory: proton
+      run: |
         curl -fLOsS https://downloads.apache.org/qpid/KEYS
         gpg --no-default-keyring --keyring trustedkeys.kbx --import KEYS
-    - run: |
+    - working-directory: proton
+      run: |
         gpgv qpid-proton-${proton}.tar.gz.asc qpid-proton-${proton}.tar.gz
