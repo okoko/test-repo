@@ -17,9 +17,19 @@ jobs:
           const token = await core.getIDToken()
           core.setSecret(token)
           core.setOutput("token", token)
+          core.exportVariable("OIDC_TOKEN", token)
 
     - run: |
         env
       env:
         TOKEN: ${{ steps.token.outputs.token }}
-        
+
+    - uses: actions/github-script@v7
+      with:
+        script: |
+          const federatedToken = process.env.OIDC_TOKEN;
+          const tokenPayload = federatedToken.split('.')[1];
+          const payload = Buffer.from(tokenPayload, "base64").toString("utf8");
+          const decodedPayload = JSON.parse(payload);
+          console.log(decodedPayload)
+          return payload
