@@ -1,0 +1,14 @@
+name: Test pwsh
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: Write-Host "Hello, Azure!"
