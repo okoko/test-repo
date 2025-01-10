@@ -47,7 +47,7 @@ jobs:
     # Setup container builder for the cache
     - name: Set up Docker Buildx
       id: buildx
-      uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325 # v2.2.1
+      uses: docker/setup-buildx-action@6a25f988bdfa969e96a38fc9f843ea31e0b5df27 # v2.2.1
       continue-on-error: true
 
     - name: Test local action
