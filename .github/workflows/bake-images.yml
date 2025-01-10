@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  CC_REGISTRY: ghcr.io/neuralnet
+  CC_REGISTRY: ghcr.io/neuralnet/
   IMAGE_TAG: ${{ github.run_number }}
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - uses: docker/bake-action@76cc8060bdff6d632a465001e4cf300684c5472c # v5.7.0
+    - uses: docker/bake-action@5ca506d06f70338a4968df87fd8bfee5cbfb84c7 # v6.0.0
       id: build
       with:
         files: docker-bake.hcl
