@@ -36,7 +36,7 @@ jobs:
         node-version: 16
       continue-on-error: true
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
         # Install with pip cache is slower than without it. Wheels get rebuilt so cache does not help.
