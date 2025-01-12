@@ -11,65 +11,45 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: List PowerShell version
+    - name: Print FormatEnumerationLimit
       run: |
-        $PSVersionTable
-    - name: List preferences
-      run: |
-        $ConfirmPreference
-        $DebugPreference
-        $ErrorActionPreference
-        $ErrorView
         $FormatEnumerationLimit
-        $InformationPreference
-        $LogCommandHealthEvent
-        $LogCommandLifecycleEvent
-        $LogEngineHealthEvent
-        $LogEngineLifecycleEvent
-        $LogProviderHealthEvent
-        $LogProviderLifecycleEvent
-        $MaximumHistoryCount
-        $OFS
-        $OutputEncoding
-        $ProgressPreference
-        $PSDefaultParameterValues
-        $PSEmailServer
-        $PSModuleAutoLoadingPreference
-        $PSNativeCommandArgumentPassing
-        $PSNativeCommandUseErrorActionPreference
-        $PSSessionApplicationName
-        $PSSessionConfigurationName
-        $PSSessionOption
-        $PSStyle
-        $Transcript
-        $VerbosePreference
-        $WarningPreference
-        $WhatIfPreference
-    - name: List environment variables
+    - name: Print version
       run: |
-        Get-ChildItem Env: | Format-Table -AutoSize
-    - name: List modules
+        $FormatEnumerationLimit = 256
+        $PSVersionTable
+    - name: Print FormatEnumerationLimit
       run: |
-        Get-Module -ListAvailable | Format-Table -AutoSize
-    - name: List commands
-      run: |
-        Get-Command * | Format-Table -AutoSize
-    - name: List aliases
-      continue-on-error: true
-      run: |
-        Get-Alias | Format-Table -AutoSize
+        $FormatEnumerationLimit
     - name: List variables
       continue-on-error: true
       run: |
-        Get-Variable | Format-Table -AutoSize
+        $FormatEnumerationLimit = 256
+        Get-Variable -Exclude FormatEnumerationLimit | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List environment variables
+      run: |
+        Get-ChildItem Env: | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List modules imported
+      run: |
+        Get-Module | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List modules available
+      run: |
+        Get-Module -ListAvailable | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List commands
+      run: |
+        Get-Command * | Format-Table -AutoSize -Wrap | Out-String -Width 256
     - name: List drives
       continue-on-error: true
       run: |
-        Get-PSDrive | Format-Table -AutoSize
+        Get-PSDrive | Format-Table -AutoSize -Wrap | Out-String -Width 256
     - name: List providers
       continue-on-error: true
       run: |
-        Get-PSProvider | Format-Table -AutoSize
+        Get-PSProvider | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List sessions
+      continue-on-error: true
+      run: |
+        Get-PSSession | Format-Table -AutoSize -Wrap | Out-String -Width 256
     - name: Find module files
       shell: bash
       run: |
