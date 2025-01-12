@@ -11,4 +11,66 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - run: Write-Host "Hello, Azure!"
+    - name: List PowerShell version
+      run: |
+        $PSVersionTable
+    - name: List preferences
+      run: |
+        $ConfirmPreference
+        $DebugPreference
+        $ErrorActionPreference
+        $ErrorView
+        $FormatEnumerationLimit
+        $InformationPreference
+        $LogCommandHealthEvent
+        $LogCommandLifecycleEvent
+        $LogEngineHealthEvent
+        $LogEngineLifecycleEvent
+        $LogProviderHealthEvent
+        $LogProviderLifecycleEvent
+        $MaximumHistoryCount
+        $OFS
+        $OutputEncoding
+        $ProgressPreference
+        $PSDefaultParameterValues
+        $PSEmailServer
+        $PSModuleAutoLoadingPreference
+        $PSNativeCommandArgumentPassing
+        $PSNativeCommandUseErrorActionPreference
+        $PSSessionApplicationName
+        $PSSessionConfigurationName
+        $PSSessionOption
+        $PSStyle
+        $Transcript
+        $VerbosePreference
+        $WarningPreference
+        $WhatIfPreference
+    - name: List environment variables
+      run: |
+        Get-ChildItem Env: | Format-Table -AutoSize
+    - name: List modules
+      run: |
+        Get-Module -ListAvailable | Format-Table -AutoSize
+    - name: List commands
+      run: |
+        Get-Command * | Format-Table -AutoSize
+    - name: List aliases
+      continue-on-error: true
+      run: |
+        Get-Alias | Format-Table -AutoSize
+    - name: List variables
+      continue-on-error: true
+      run: |
+        Get-Variable | Format-Table -AutoSize
+    - name: List drives
+      continue-on-error: true
+      run: |
+        Get-PSDrive | Format-Table -AutoSize
+    - name: List providers
+      continue-on-error: true
+      run: |
+        Get-PSProvider | Format-Table -AutoSize
+    - name: Find module files
+      shell: bash
+      run: |
+        find / -xdev -name '*.psm1'
