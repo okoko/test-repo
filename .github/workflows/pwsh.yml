@@ -59,8 +59,9 @@ jobs:
       run: |
         Get-MgContext
     - name: List modules with amended path
+      # https://github.com/actions/runner-images/issues/10733
       run: |
-        $env:PSModulePath = "/usr/share;" + $env:PSModulePath
+        $env:PSModulePath = $env:PSModulePath + ":/usr/share"
         Get-Module -ListAvailable | Format-Table -AutoSize -Wrap | Out-String -Width 256
         Get-Command * | Format-Table -AutoSize -Wrap | Out-String -Width 256
     - name: Find module files
