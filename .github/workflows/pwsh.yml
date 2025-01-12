@@ -50,6 +50,19 @@ jobs:
       continue-on-error: true
       run: |
         Get-PSSession | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: List Az context
+      continue-on-error: true
+      run: |
+        Get-AzContext
+    - name: List Graph context
+      continue-on-error: true
+      run: |
+        Get-MgContext
+    - name: List modules with amended path
+      run: |
+        $env:PSModulePath = "/usr/share;" + $env:PSModulePath
+        Get-Module -ListAvailable | Format-Table -AutoSize -Wrap | Out-String -Width 256
+        Get-Command * | Format-Table -AutoSize -Wrap | Out-String -Width 256
     - name: Find module files
       shell: bash
       run: |
