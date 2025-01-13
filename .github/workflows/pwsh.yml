@@ -50,9 +50,14 @@ jobs:
       continue-on-error: true
       run: |
         Get-PSSession | Format-Table -AutoSize -Wrap | Out-String -Width 256
+    - name: Print session
+      continue-on-error: true
+      run: |
+        Get-Content $PROFILE
     - name: List Az context
       continue-on-error: true
       run: |
+        $env:PSModulePath = $env:PSModulePath + ":/usr/share"
         Get-AzContext
     - name: List Graph context
       continue-on-error: true
