@@ -9,7 +9,7 @@ defaults:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - name: Print FormatEnumerationLimit
       run: |
@@ -72,4 +72,4 @@ jobs:
     - name: Find module files
       shell: bash
       run: |
-        find / -xdev -name '*.psm1'
+        find / -xdev -name '*.psd1'
