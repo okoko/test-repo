@@ -14,12 +14,14 @@ jobs:
     - name: Get IMDS versions
       continue-on-error: true
       run: curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/versions" | jq
+    # The latest version was last in the array.
 
-    - name: Get first IMDS version
+    # (Seems the filtering is not supported)
+    - name: Check if getting the oldest version is supported
       continue-on-error: true
       run: curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/versions/apiVersions/0?format=text"
 
-    - name: Get last IMDS version
+    - name: Check if getting the newest version is supported
       continue-on-error: true
       run: curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/versions/apiVersions/-1?format=text"
 
@@ -60,9 +62,11 @@ jobs:
       continue-on-error: true
       run: curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | jq
 
-    - name: Get events
-      continue-on-error: true
-      run: curl -s -H Metadata:true "http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01" | jq
+    # This takes some time because events are not enabled by default
+    # https://learn.microsoft.com/en-us/azure/virtual-machines/linux/scheduled-events#enabling-and-disabling-scheduled-events
+    # - name: Get events
+    #   continue-on-error: true
+    #   run: curl -s -H Metadata:true "http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01" | jq
 
     - name: id
       run: id
@@ -97,10 +101,13 @@ jobs:
         grep . /etc/apt/sources.list.d/*
         dpkg -l
 
+    - name: List /etc files
+      run: find /etc -ls
+
     - name: docker system info
       run: |
         docker system info
-        cat /etc/docker/daemon.json
+        [ -r /etc/docker/daemon.json ] && cat /etc/docker/daemon.json
 
     - name: Show runner context
       run: echo '${{ toJSON(runner) }}'
