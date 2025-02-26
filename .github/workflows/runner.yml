@@ -10,24 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     environment: test-env
     steps:
+    - name: Get runner VM metadata
+      continue-on-error: true
+      run: curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq
+
+    - name: Get only the region
+      continue-on-error: true
+      run: |
+        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance/compute/location?api-version=2021-02-01"
+
     - name: id
       run: id
-      
+
     - name: scan pipx
       run: pipx list
-      
+
     - name: List environment
       run: env | sort
 
     - name: List /opt files
       run: find /opt -maxdepth 3 -ls
-      
+
     - name: List /usr/local files
       run: find /usr/local -maxdepth 3 -ls
 
     - name: List home files
       run: find /home/runner -maxdepth 3 -ls
-      
+
     - name: Find commands
       run: |
         IFS=:
