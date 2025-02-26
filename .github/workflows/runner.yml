@@ -135,4 +135,4 @@ jobs:
       run: cat /boot/config-$(uname -r)
 
     - name: Check nfs module
-      run: modinfo -R nfs
+      run: modprobe -R nfs
