@@ -78,12 +78,15 @@ jobs:
       run: env | sort
 
     - name: List /opt files
+      continue-on-error: true
       run: find /opt -maxdepth 3 -ls
 
     - name: List /usr/local files
+      continue-on-error: true
       run: find /usr/local -maxdepth 3 -ls
 
     - name: List home files
+      continue-on-error: true
       run: find /home/runner -maxdepth 3 -ls
 
     - name: Find commands
@@ -102,6 +105,7 @@ jobs:
         dpkg -l
 
     - name: List /etc files
+      continue-on-error: true
       run: find /etc -ls
 
     - name: docker system info
