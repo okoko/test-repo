@@ -21,6 +21,7 @@ jobs:
     - uses: docker/bake-action@7bff531c65a5cda33e52e43950a795b91d450f63 # v6.3.0
       id: build
       with:
+        source: .
         files: docker-bake.hcl
 
     - name: Save metadata images list
