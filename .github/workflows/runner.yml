@@ -106,7 +106,7 @@ jobs:
 
     - name: Find /etc files
       continue-on-error: true
-      run: find /etc -maxdepth 3 \( -type d \( ! -readable -o ! -executable \) -prune \) -o -ls
+      run: sudo find /etc -maxdepth 3 -o -ls
 
     - name: List /etc/docker files
       continue-on-error: true
