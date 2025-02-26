@@ -104,14 +104,19 @@ jobs:
         grep . /etc/apt/sources.list.d/*
         dpkg -l
 
+    - name: Find /etc files
+      continue-on-error: true
+      run: find /etc -maxdepth 3 -ls
+
     - name: List /etc files
       continue-on-error: true
-      run: find /etc -ls
+      run: ls -l /etc
 
     - name: docker system info
+      continue-on-error: true
       run: |
         docker system info
-        [ -r /etc/docker/daemon.json ] && cat /etc/docker/daemon.json
+        cat /etc/docker/daemon.json
 
     - name: Show runner context
       run: echo '${{ toJSON(runner) }}'
