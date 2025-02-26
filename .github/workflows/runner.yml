@@ -106,11 +106,11 @@ jobs:
 
     - name: Find /etc files
       continue-on-error: true
-      run: find /etc -maxdepth 3 -ls
+      run: find /etc -maxdepth 3 \( -type d \( ! -readable -o ! -executable \) -prune \) -o -ls
 
-    - name: List /etc files
+    - name: List /etc/docker files
       continue-on-error: true
-      run: ls -l /etc
+      run: ls -l /etc/docker
 
     - name: docker system info
       continue-on-error: true
