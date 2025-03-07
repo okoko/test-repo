@@ -74,6 +74,9 @@ jobs:
     - name: scan pipx
       run: pipx list
 
+    - name: List shell variables
+      run: set
+
     - name: List environment
       run: env | sort
 
