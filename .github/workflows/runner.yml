@@ -109,7 +109,7 @@ jobs:
 
     - name: Find /etc files
       continue-on-error: true
-      run: sudo find /etc -maxdepth 3 -o -ls
+      run: sudo find /etc -maxdepth 3 -ls
 
     - name: List /etc/docker files
       continue-on-error: true
