@@ -121,6 +121,8 @@ jobs:
         docker system info
         cat /etc/docker/daemon.json
 
+    - name: Show github context
+      run: echo '${{ toJSON(github) }}'
     - name: Show runner context
       run: echo '${{ toJSON(runner) }}'
     - name: Show env context
