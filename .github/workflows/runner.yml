@@ -2,6 +2,11 @@ name: Check runner
 
 on:
   workflow_dispatch:
+    inputs:
+      an-input:
+        description: Just a test input
+        default: foo
+        type: string
 
 jobs:
 
@@ -119,11 +124,35 @@ jobs:
       continue-on-error: true
       run: systemctl status --all
 
+    - name: List udevadm
+      continue-on-error: true
+      run: udevadm info --export-db
+
+    - name: List block devices
+      continue-on-error: true
+      run: lsblk -f
+
+    - name: List devices and addresses
+      continue-on-error: true
+      run: ip a
+
+    - name: List routes
+      continue-on-error: true
+      run: ip r
+
+    - name: List nft ruleset
+      continue-on-error: true
+      run: sudo nft list ruleset
+
+    - name: List iptables
+      continue-on-error: true
+      run: sudo iptables-save
+
     - name: docker system info
       continue-on-error: true
       run: |
         docker system info
-        cat /etc/docker/daemon.json
+        [ -e /etc/docker/daemon.json ] && cat /etc/docker/daemon.json || echo "No /etc/docker/daemon.json"
 
     - name: Show github context
       run: echo '${{ toJSON(github) }}'
@@ -131,6 +160,8 @@ jobs:
       run: echo '${{ toJSON(runner) }}'
     - name: Show env context
       run: echo '${{ toJSON(env) }}'
+    - name: Show inputs context
+      run: echo '${{ toJSON(inputs) }}'
     - name: Show secrets context
       run: echo "$SECRETS"
       env:
