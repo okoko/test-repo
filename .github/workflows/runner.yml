@@ -4,8 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       an-input:
-        description: Just a test input
-        default: foo
+        description: Just a test input with a dash in name
+        default: an-input oletus
+        type: string
+      input:
+        description: Just a test input without a dash in name
+        default: input oletus
         type: string
 
 jobs:
