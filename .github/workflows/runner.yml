@@ -115,6 +115,10 @@ jobs:
       continue-on-error: true
       run: ls -l /etc/docker
 
+    - name: List systemd status
+      continue-on-error: true
+      run: systemctl status --all
+
     - name: docker system info
       continue-on-error: true
       run: |
