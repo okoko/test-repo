@@ -1,0 +1,11 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test arithmetic expressions
+        run: echo "${{ (2 + 5) * 4 }}"
+      - name: Test string concatenation
+        run: echo "${{ 'a'+'b' }}"
