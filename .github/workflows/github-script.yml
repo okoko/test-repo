@@ -1,7 +1,24 @@
 name: Test script
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      test:
+        description: Just to give an input
+        default: value
+        type: string
+      boolean:
+        description: Just to give a boolean input
+        default: true
+        type: boolean
+      number:
+        description: Just to give a number input
+        default: 42
+        type: number
+      environment:
+        description: Just to give an environment input
+        required: false
+        type: environment
 
 permissions:
   actions: read
@@ -12,11 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Test arithmetic expressions
-        run: echo "${{ (2 + 5) * 4 }}"
-      - name: Test string concatenation
-        run: echo "${{ 'a'+'b' }}"
       - uses: actions/github-script@v7
+        continue-on-error: true
         id: previous
         with:
           script: |
@@ -43,3 +57,18 @@ jobs:
             }
 
       - run: echo ${{ steps.previous.outputs.sha }}
+        continue-on-error: true
+
+      - name: context
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            console.log(context)
+
+      - name: github
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            console.log(github)
