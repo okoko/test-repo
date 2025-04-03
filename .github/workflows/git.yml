@@ -1,7 +1,7 @@
+name: Git
+
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   inspect:
@@ -18,3 +18,4 @@ jobs:
       - run: |
           git clone https://x-access-token:${{ github.token }}@github.com/okoko/test-repo.git
           cat test-repo/.git/config
+      
