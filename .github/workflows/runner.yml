@@ -83,6 +83,9 @@ jobs:
     - name: scan pipx
       run: pipx list
 
+    - name: List pip
+      run: pip list
+
     - name: List shell variables
       run: set
 
