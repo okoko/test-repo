@@ -1,0 +1,25 @@
+name: Summary markdown
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Make summary
+      run: |
+        cat <<EOF >> "$GITHUB_STEP_SUMMARY"
+        Some text.
+        EOF
+        cat <<"EOF" >> "$GITHUB_STEP_SUMMARY"
+
+        Some
+        more
+        text with `quoted text` option.
+
+        Another text.
+        EOF
+        cat "$GITHUB_STEP_SUMMARY"
+        od -ta "$GITHUB_STEP_SUMMARY"
+        
