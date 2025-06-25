@@ -6,4 +6,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/actions/composite
+    - uses: okoko/test-repo/.github/actions/composite
