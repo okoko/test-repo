@@ -1,0 +1,8 @@
+name: Test using local composite action
+description: Test action intended for private repository
+runs:
+  using: composite
+  steps:
+  - name: Hello world
+    run: echo "Hello world!"
+    shell: sh
