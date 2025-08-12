@@ -13,7 +13,7 @@ jobs:
       # regclient does not currently release a version with support for exporting multiple images
       # https://github.com/regclient/regclient/issues/710
       - name: Check out regclient
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: okoko/regclient
           ref: export-many
