@@ -1,0 +1,36 @@
+name: Python
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: python
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Print Python version
+      run: |
+        import sys
+        print(sys.executable, sys.version)
+
+    - name: List installed packages
+      run: |
+        import pkg_resources
+        installed_packages = pkg_resources.working_set
+        for package in installed_packages:
+            print(f"{package.key}=={package.version}")
+
+    - name: Install Jinja2
+      shell: bash
+      run: |
+        python -m pip install Jinja2
+
+    - name: Test Jinja2 installation
+      run: |
+        from jinja2 import Template
+        template = Template("Hello, {{ name }}!")
+        output = template.render(name="World")
+        print(output)
