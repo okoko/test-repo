@@ -18,15 +18,20 @@ jobs:
 
     - name: List installed packages
       run: |
-        import pkg_resources
-        installed_packages = pkg_resources.working_set
-        for package in installed_packages:
-            print(f"{package.key}=={package.version}")
+        from importlib.metadata import Distribution
+        for d in Distribution.discover():
+            print(f"{d.name}=={d.version}")
 
     - name: Install Jinja2
       shell: bash
       run: |
-        python -m pip install Jinja2
+        python -m pip install cube-solver
+
+    - name: List installed packages
+      continue-on-error: true
+      run: |
+        from importlib.metadata import version
+        print(f"cube-solver=={version('cube-solver')}")
 
     - name: Test Jinja2 installation
       run: |
