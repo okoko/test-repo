@@ -10,7 +10,7 @@ jobs:
       - run: git config -l
       - run: cat ~/.gitconfig
         continue-on-error: true
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: cat .git/config
       - run: cat ~/.gitconfig
         continue-on-error: true
