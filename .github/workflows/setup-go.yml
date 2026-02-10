@@ -20,7 +20,7 @@ jobs:
           path: regclient
 
       - name: Setup go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version-file: 'regclient/go.mod'
           cache-dependency-path: 'regclient/go.sum'
