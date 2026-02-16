@@ -45,7 +45,7 @@ jobs:
 
       # https://docs.docker.com/build/ci/github-actions/cache/
       - name: Cache Docker layers
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /tmp/.buildx
           key: buildx-${{ matrix.image }}-${{ github.sha }}

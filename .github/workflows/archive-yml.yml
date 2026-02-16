@@ -12,7 +12,7 @@ jobs:
     steps:
     - run: mkdir proton
     - id: cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: proton
         key: proton-${{ env.proton }}
