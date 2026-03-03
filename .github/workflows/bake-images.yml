@@ -37,7 +37,7 @@ jobs:
         jq -r '.target | .[].tags | .[] | select(. | endswith(":latest") | not)' > "$RUNNER_TEMP/images.txt"
 
     - name: Upload built images list
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: built-images
         path: |
