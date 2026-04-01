@@ -92,6 +92,12 @@ jobs:
     - name: List environment
       run: env | sort
 
+    - name: List GitHub script environment
+      uses: actions/github-script@v8
+      with:
+        script: |
+          console.log(process.env)
+
     - name: List /opt files
       continue-on-error: true
       run: find /opt -maxdepth 3 -ls
