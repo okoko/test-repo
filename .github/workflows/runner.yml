@@ -93,7 +93,7 @@ jobs:
       run: env | sort
 
     - name: List GitHub script environment
-      uses: actions/github-script@v8
+      uses: actions/github-script@v9
       with:
         script: |
           console.log(process.env)
