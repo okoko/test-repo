@@ -17,6 +17,14 @@ jobs:
 
       - run: npm install @actions/attest
 
+      - run: env | sort
+      - name: List GitHub script environment
+        uses: actions/github-script@v9
+        with:
+          script: |
+            console.log(process.env)
+
+
       - name: Test attest
         uses: actions/github-script@v9
         with:
