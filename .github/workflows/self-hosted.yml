@@ -22,7 +22,7 @@ jobs:
       run: pipx list
       continue-on-error: true
 
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Cache MongoDB binary
       uses: actions/cache@v5
