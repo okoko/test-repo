@@ -105,22 +105,25 @@ jobs:
       run: echo "${env:C}"
       env:
         C: ${{ toJSON(github) }}
+
     - name: Show runner context
       continue-on-error: true
       run: echo "${env:C}"
       env:
         C: ${{ toJSON(runner) }}
-      run: echo '${{ toJSON(runner) }}'
+
     - name: Show env context
       continue-on-error: true
       run: echo "${env:C}"
       env:
         C: ${{ toJSON(env) }}
+
     - name: Show inputs context
       continue-on-error: true
       run: echo "${env:C}"
       env:
         C: ${{ toJSON(inputs) }}
+
     - name: Show secrets context
       continue-on-error: true
       run: echo "${env:C}"
