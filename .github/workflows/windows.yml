@@ -72,7 +72,8 @@ jobs:
 
     - name: List environment
       continue-on-error: true
-      run: dir env:
+      run: |
+        dir env:
 
     - name: List GitHub script environment
       continue-on-error: true
